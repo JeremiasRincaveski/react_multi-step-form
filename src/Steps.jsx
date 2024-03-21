@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
-
+import { MyContext } from './App';
 const NavBar = styled.nav`
   background: url('/svg/bg-sidebar-mobile.svg');
   background-repeat: no-repeat;
@@ -33,7 +33,7 @@ const NavBar = styled.nav`
     padding: 2rem 1.5rem;
 
     height: 568px;
-    width: 400px;
+    width: 274px;
 
     ol {
       flex-direction: column;
@@ -47,8 +47,8 @@ const Button = styled.button`
   height: 2rem;
   border-radius: 50%;
   border: 1px solid var(--Light-blue);
-  background-color: ${props => props.isativo === 'true' ? 'var(--Light-blue)' : 'transparent'};
-  color: ${props => props.isativo === 'true' ? 'var(--Marine-blue)' : 'var(--Light-blue)'};
+  background-color: ${props => props.$isativo === 'true' ? 'var(--Light-blue)' : 'transparent'};
+  color: ${props => props.$isativo === 'true' ? 'var(--Marine-blue)' : 'var(--Light-blue)'};
   font-size: 1rem;
   font-weight: var(--Font-weight-bold);
   cursor: pointer;
@@ -77,32 +77,14 @@ const Info = styled.div`
   }
 `
 
-function Steps({ changeStep }) {
-  const [botoes, setBotoes] = useState({
-    1: true,
-    2: false,
-    3: false,
-    4: false,
-  });
-
-  const handleButton = (e) => {
-    const id = e.target.textContent;
-    changeStep(id);
-    
-    setBotoes({
-      1: false,
-      2: false,
-      3: false,
-      4: false,
-      [id]: true
-    })
-  }
+function Steps() {
+  const { step, setStep, botoes, handleButton } = useContext(MyContext)
 
   return (
     <NavBar>
       <ol>
         <li>
-          <Button isativo={`${botoes[1]}`} onClick={handleButton}>1</Button>
+          <Button $isativo={`${botoes[1]}`} onClick={() => handleButton(1)}>1</Button>
           
           <Info>
             <span>step 1</span>
@@ -111,7 +93,7 @@ function Steps({ changeStep }) {
         </li>
         
         <li>
-          <Button isativo={`${botoes[2]}`} onClick={handleButton}>2</Button>
+          <Button $isativo={`${botoes[2]}`} onClick={() => handleButton(2)}>2</Button>
           
           <Info>
             <span>step 2</span>
@@ -119,7 +101,7 @@ function Steps({ changeStep }) {
           </Info>
         </li>
         <li>
-          <Button isativo={`${botoes[3]}`} onClick={handleButton}>3</Button>
+          <Button $isativo={`${botoes[3]}`} onClick={() => handleButton(3)}>3</Button>
 
           <Info>
             <span>step 3</span>
@@ -127,7 +109,7 @@ function Steps({ changeStep }) {
           </Info>
         </li>
         <li>
-          <Button isativo={`${botoes[4]}`} onClick={handleButton}>4</Button>
+          <Button $isativo={`${botoes[4]}`} onClick={() => handleButton(4)}>4</Button>
         
           <Info>
             <span>step 4</span>
