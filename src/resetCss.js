@@ -103,4 +103,9 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: var(--Font-weight-regular);
     font-size: var(--Font-size);
   }
+
+  #root {
+    height: 100%;
+    width: 100%;
+  }
 `
